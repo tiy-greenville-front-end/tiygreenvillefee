@@ -40,6 +40,8 @@
     <!--[if lt IE 9]>
     <script src="assets/plugins/modernizr.min.js"></script>
     <![endif]-->
+
+    <script src="assets/plugins/jquery.min.js"></script>
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
@@ -187,7 +189,7 @@
                                 To get started, we'll be using <a href="http://github.com">Github</a> extensively. You need to
                                 <a href="http://github.com/signup">sign up for a free Github account</a>, and then complete the
                                 <a href="http://goo.gl/forms/qHXcruLgPh">new student questionnaire</a> to tell me a little about you.
-                                Include your github username in the questionnaire so I know to add you to <a href="https://github.com/tiy-greenville-frontend-2016-may">our github
+                                Include your github username in the questionnaire so I know to add you to <a class="org-link" href="#">our github
                                 organization</a>. Throughout the course,
                                 I'll be adding repositories to distribute examples from in class demos so you'll want to
                                 bookmark our organization page.
@@ -209,7 +211,7 @@
                             </p>
 
                             <p>
-                                Follow the steps below, which are _due the first day of class_.
+                                Follow the steps below, which are <strong>due the first day of class</strong>.
                             </p>
 
 
@@ -357,9 +359,38 @@
                         <li><p>Get Started</p>
 
                         <ul>
-                        <li>[ ] <a href="https://github.com/signup">Create a Github account</a></li>
-                        <li>[ ] <a href="https://github.com/tiy-greenville-frontend-2016-may/notes">Star the notes repo by clicking on the "Star" button</a>
+                        <li><input type="checkbox" /> <a href="https://github.com/signup">Create a Github account</a></li>
+                        <li><input type="checkbox" /> <a class="org-link" href="#/overview">Star the overview repo by clicking on the "Star" button</a>
+                        <script>
+                          (function($){
+                            $(function(){
+                              // Build the github org link
+                              var now = new Date();
+                              var year = now.getFullYear();
+                              var month = now.month;
 
+                              var gitHubOrgLink = 'https://github.com/tiy-greenville-front-end';
+                              var nextCohort = 'fall';
+
+                              // cohorts
+                              // #1: nov (10), dec (11), *jan (0), feb (1)
+                              // #2: march (2), april (3), *may (4), june (5)
+                              // #3: july (6), august (7), *sept (8), oct (9)
+                              if([10, 11, 0, 1].includes(month)){
+                                nextCohort = 'spring';
+                                year = month > 9 ? year + 1 : year
+                              }else if ([2, 3, 4, 5].includes(month)) {
+                                nextCohort = 'summer';
+                              }
+
+                              $('.org-link').each(function(){
+                                var $link = $(this);
+                                var newAddress = $link.attr('href').replace('#', [gitHubOrgLink, nextCohort, year].join('-'));
+                                $link.attr('href', newAddress);
+                              });
+                            });
+                          }(jQuery));
+                        </script>
                         <ul>
                         <li><a href="https://help.github.com/articles/about-stars">More info about stars</a></li>
                         </ul>
@@ -369,9 +400,9 @@
                         <li><p><a href="https://github.com/settings/profile">Edit your Github profile</a> to provide:</p>
 
                         <ul>
-                        <li>[ ] A picture, so I can recognize your face.</li>
-                        <li>[ ] Your full name, so I can recognize your name.</li>
-                        <li>[ ] A valid public email address, so I can contact you if I need to.</li>
+                        <li><input type="checkbox" /> A picture, so I can recognize your face.</li>
+                        <li><input type="checkbox" /> Your full name, so I can recognize your name.</li>
+                        <li><input type="checkbox" /> A valid public email address, so I can contact you if I need to.</li>
                         </ul>
                         </li>
                         <li><p>Install Atom.app.</p>
@@ -379,9 +410,9 @@
                         <p>Atom is a text editor made specifically for writing code, so we'll be using it a lot in class.</p>
 
                         <ul>
-                        <li>[ ] <a href="https://atom.io/download/mac">Download Atom</a></li>
-                        <li>[ ] Unzip the file and drag it to your /Applications directory.</li>
-                        <li>[ ] Drag it to your Dock so you have quick access</li>
+                        <li><input type="checkbox" /> <a href="https://atom.io/download/mac">Download Atom</a></li>
+                        <li><input type="checkbox" /> Unzip the file and drag it to your /Applications directory.</li>
+                        <li><input type="checkbox" /> Drag it to your Dock so you have quick access</li>
                         </ul>
                         </li>
                         <li><p>Learn some HTML and CSS</p>
@@ -393,38 +424,38 @@
                         Also, make sure not to copy and paste the examples, but actually type out all of the HTML and CSS.</p>
 
                         <ul>
-                        <li>[ ] Complete <a href="http://learn.shayhowe.com/html-css/building-your-first-web-page/">Building Your First Web Page</a></li>
-                        <li>[ ] Complete <a href="http://learn.shayhowe.com/html-css/getting-to-know-html/">Getting to Know HTML</a></li>
-                        <li>[ ] Read through <a href="http://learn.shayhowe.com/html-css/getting-to-know-css/">Getting to Know CSS</a></li>
-                        <li>[ ] Complete <a href="http://learn.shayhowe.com/html-css/opening-the-box-model/">Opening the Box Model</a></li>
+                        <li><input type="checkbox" /> Complete <a href="http://learn.shayhowe.com/html-css/building-your-first-web-page/">Building Your First Web Page</a></li>
+                        <li><input type="checkbox" /> Complete <a href="http://learn.shayhowe.com/html-css/getting-to-know-html/">Getting to Know HTML</a></li>
+                        <li><input type="checkbox" /> Read through <a href="http://learn.shayhowe.com/html-css/getting-to-know-css/">Getting to Know CSS</a></li>
+                        <li><input type="checkbox" /> Complete <a href="http://learn.shayhowe.com/html-css/opening-the-box-model/">Opening the Box Model</a></li>
                         <li>(Optional) Complete the rest of the lessons on learn.shayhowe.com</li>
                         </ul>
                         </li>
                         <li><p>Make your first repository on GitHub</p>
 
                         <ul>
-                        <li>[ ] <a href="https://guides.github.com/activities/hello-world/">Complete the "Hello World" Github guide</a></li>
-                        <li>[ ] Add a link to your new Github repo as a comment in your WIP Issue.</li>
+                        <li><input type="checkbox" /> <a href="https://guides.github.com/activities/hello-world/">Complete the "Hello World" Github guide</a></li>
+                        <li><input type="checkbox" /> Add a link to your new Github repo as a comment in your WIP Issue.</li>
                         </ul>
                         </li>
                         <li><p>Push your code from learning HTML and CSS to GitHub</p>
 
                         <ul>
-                        <li>[ ] Complete <a href="https://guides.github.com/introduction/getting-your-project-on-github/">Getting your project on GitHub</a>
+                        <li><input type="checkbox" /> Complete <a href="https://guides.github.com/introduction/getting-your-project-on-github/">Getting your project on GitHub</a>
                         to publish your webpage from above.</li>
-                        <li>[ ] Add a link to your new Github repo as a comment in your WIP Issue.</li>
+                        <li><input type="checkbox" /> Add a link to your new Github repo as a comment in your WIP Issue.</li>
                         </ul>
                         </li>
 
                         <li><p>New Student Questionnaire</p>
 
                         <ul>
-                        <li>[ ] Complete the <a href="http://goo.gl/forms/qHXcruLgPh">new student questionnaire</a></li>
+                        <li><input type="checkbox" /> Complete the <a href="http://goo.gl/forms/qHXcruLgPh">new student questionnaire</a></li>
                         <li></li>
                         </ul>
                         </li>
 
-                        <li>Huzzah! You're done.</li>
+                        <li>Huzzah! You're done this section.</li>
                         </ul>
 
                     </div>
@@ -473,8 +504,8 @@
                             <i class="fa fa-thumbs-o-up"></i>
 
                             <div class="inner-content">
-                                <span class="number" data-from="500" data-to="1080" data-refresh-interval="10">
-                                    1080
+                                <span class="number" data-from="200" data-to="448" data-refresh-interval="10">
+                                    448
                                 </span>
                             </div>
                             <!-- //.inner-content -->
@@ -507,8 +538,8 @@
                             <i class="fa fa-coffee"></i>
 
                             <div class="inner-content">
-                                <span class="number" data-from="5" data-to="40" data-refresh-interval="10">
-                                    40
+                                <span class="number" data-from="45" data-to="157" data-refresh-interval="10">
+                                    157
                                 </span>
                             </div>
                             <!-- //.inner-content -->
@@ -888,7 +919,6 @@
 
 
     <!-- Plugins JS -->
-    <script src="assets/plugins/jquery.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/detectmobilebrowser/detectmobilebrowser.js"></script>
     <script src="assets/plugins/smartresize/smartresize.js"></script>
@@ -920,11 +950,6 @@
     <!-- Map JS -->
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="assets/js/component/map.js"></script>
-
-    <script>
-        //document.getElementsByClassName('current-year').text =
-    </script>
-
 </body>
 
 </html>
